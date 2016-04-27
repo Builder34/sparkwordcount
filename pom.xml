@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>spark.test</groupId>
+  <artifactId>sparkwordcount</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>sparkwordcount</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.9</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- hadoop-client的版本根据集群安装的决定 -->
+    <dependency>
+		<groupId>org.apache.hadoop</groupId>
+		<artifactId>hadoop-client</artifactId>
+		<version>2.6.0</version>
+	</dependency>
+	 <!--spark-core的版本根据集群scala安装版本以及spark版本共同决定 -->
+    <dependency>
+		<groupId>org.apache.spark</groupId>
+		<artifactId>spark-core_2.11</artifactId>
+		<version>1.5.0</version>
+	</dependency>
+    
+  <!--如果有依赖除hadoop、spark之外的包，打包时需要把依赖包也加进去。为了将依赖包加入，需要在pom.xml中加入如下内容  --> 
+  </dependencies>
+  <build>
+  	<plugins>
+  		<plugin>
+  			<artifactId>maven-assembly-plugin</artifactId>
+  			<version>2.4</version>
+  			<configuration>
+  				<descriptorRefs>
+  					<descriptorRef>jar-with-dependencies</descriptorRef>
+  				</descriptorRefs>
+  			</configuration>
+  			<executions>
+  				<execution>
+  					<id>make-assembly</id>
+  					<phase>package</phase>
+  					<goals>
+  						<goal>single</goal>
+  					</goals>
+  				</execution>
+  			</executions>
+  		</plugin>
+  	</plugins>
+  </build>
+  
+</project>
